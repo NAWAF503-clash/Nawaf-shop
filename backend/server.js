@@ -14,15 +14,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-console.log("URI =", process.env.MONGO_URI);
+
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("MongoDB connecté");
 })
 .catch((err) => {
-    console.error("Erreur MongoDB complète :");
-    console.error(err);
+    console.error("Erreur MongoDB :", err);
 });
 
 
@@ -53,17 +52,15 @@ app.post("/register", async (req, res) => {
     res.json({
         message: "Utilisateur créé"
     });
+
+
 });
-app.post("/register", async (req, res) => {
+ app.post("/register", async (req, res) => { const { email, password } = req.body;
+ console.log("Inscription reçue :", email); const existingUser = await User.findOne({ email }); 
+ // ... 
+ });
 
-    const { email, password } = req.body;
-
-    console.log("Inscription reçue :", email);
-
-    const existingUser = await User.findOne({ email });
-
-    // ...
-});
+    
 
 // LOGIN
 app.post("/login", async (req, res) => {
