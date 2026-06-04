@@ -122,6 +122,20 @@ app.get("/users", async (req, res) => {
     const users = await User.find();
     res.json(users);
 });
+
+app.get("/users", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        console.log("Erreur users :", error);
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
