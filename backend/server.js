@@ -55,10 +55,7 @@ app.post("/register", async (req, res) => {
 
 
 });
- app.post("/register", async (req, res) => { const { email, password } = req.body;
- console.log("Inscription reçue :", email); const existingUser = await User.findOne({ email }); 
- // ... 
- });
+
 
     
 
@@ -118,10 +115,7 @@ app.get("/", (req, res) => {
     res.send("Serveur OK");
 });
 
-app.get("/users", async (req, res) => {
-    const users = await User.find();
-    res.json(users);
-});
+
 
 app.get("/users", async (req, res) => {
     try {
