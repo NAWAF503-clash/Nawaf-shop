@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Panier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="panier">
+
+<h1 style="padding:20px;">🛒 Mon Panier</h1>
+
+<div id="cart-items" style="padding:20px;"></div>
+
+<h2 style="padding:20px;">Total : <span id="cart-total">0</span> fr</h2>
+
+<h2 style="padding:20px;">Paiement à la livraison 🚚</h2>
+
+<div style="padding:20px;">
+     <input type="text" id="nom" placeholder="Nom complet" required><br><br>
+     <input type="number" id="numero" placeholder="Numero complet" required><br><br>
+    <input type="text" id="adresse" placeholder="Adresse de livraison" required><br><br>
+    <button onclick="commander()">Commander</button>
+</div>
+
+
+<button onclick="clearCart()" style="margin:20px;padding:10px;">
+Vider le panier
+</button>
+
+
+<div class="retour">
+    <a href="index.html">retoure a l'acceuilt</a>
+  </div>
+
+  <hr>
+  
+  <footer>
+      <p>@Créé par Nawaf</p>
+  
+  </footer>
+
+<script src="panier.js"></script>
+
+</body>
+</html>

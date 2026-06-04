@@ -1,0 +1,10 @@
+
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="250" cy="250" r="245" fill="none" stroke="white" stroke-width="10"/>
+  <g fill="white" font-family="Arial, sans-serif" text-anchor="middle">
+    <!-- Texte stylisé "NAF" -->
+    <text x="250" y="200" font-size="120" font-weight="bold" letter-spacing="5">NAF</text>
+    <!-- Texte "NAWAF" -->
+    <text x="250" y="320" font-size="80" font-weight="bold" letter-spacing="5">NAWAF</text>
+  </g>
+</svg>
