@@ -3,11 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+
 const Order = require("./models/order");
 
-const User = require("./models/User");
+
 
 const app = express();
 
@@ -24,59 +23,6 @@ mongoose.connect(process.env.MONGO_URI)
     console.error("Erreur MongoDB :", err);
 });
 
-
-
-// REGISTER
-app.post("/register", async (req, res) => {
-
-    const { email, password } = req.body;
-
-    // Vérifie si l'email existe déjà
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-        return res.status(400).json({
-            message: "Email déjà utilisé"
-        });
-    }
-
-    const hashed = await bcrypt.hash(password, 10);
-
-    const user = new User({
-        email,
-        password: hashed
-    });
-
-    await user.save();
-
-    res.json({
-        message: "Utilisateur créé"
-    });
-
-
-});
-
-
-    
-
-// LOGIN
-app.post("/login", async (req, res) => {
-
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-
-    if (!user) return res.status(400).json({ message: "User introuvable" });
-
-    const valid = await bcrypt.compare(password, user.password);
-
-    if (!valid) return res.status(400).json({ message: "Mot de passe faux" });
-
-    const token = jwt.sign({ id: user._id },   process.env.JWT_SECRET,
-    { expiresIn: "1d" });
-
-    res.json({ token });
-});
 
 
 app.post("/commande", async (req, res) => {
