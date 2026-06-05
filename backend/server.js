@@ -62,19 +62,6 @@ app.get("/", (req, res) => {
 });
 
 
-
-app.get("/users", async (req, res) => {
-    try {
-        const users = await User.find();
-        res.json(users);
-    } catch (error) {
-        console.log("Erreur users :", error);
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
-
 app.post("/add-product", async (req, res) => {
 
     try {
@@ -106,15 +93,7 @@ app.post("/add-product", async (req, res) => {
 
 });
 
-app.get("/products", async (req, res) => {
 
-    const products = await Product.find();
-
-    res.json(products);
-
-});
-
-const Product = require("./models/Product");
 
 app.get("/products", async (req, res) => {
     try {
