@@ -57,3 +57,46 @@ function searchProduct() {
 
     });
 }
+
+async function chargerProduits() {
+
+    const response = await fetch(
+        "https://nawaf-shop-backend.onrender.com/products"
+    );
+
+    const produits = await response.json();
+
+    let html = "";
+
+    produits.forEach(p => {
+
+       html += `
+<div class="carte">
+    <div class="img">
+        <img src="${p.image}" alt="${p.nom}">
+    </div>
+
+    <div class="desc">${p.description}</div>
+
+    <div class="titre">${p.nom}</div>
+
+    <div class="box">
+        <div class="prix">${p.prix} fr</div>
+
+        <button
+            class="achat"
+            data-name="${p.nom}"
+            data-price="${p.prix}">
+            Acheter
+        </button>
+    </div>
+</div>
+`;
+
+    });
+
+    document.getElementById("products").innerHTML = html;
+
+}
+
+chargerProduits();

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const Order = require("./models/order");
-
+const Product = require("./models/Product");
 
 
 const app = express();
@@ -69,6 +69,59 @@ app.get("/users", async (req, res) => {
         res.json(users);
     } catch (error) {
         console.log("Erreur users :", error);
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+app.post("/add-product", async (req, res) => {
+
+    try {
+
+        const { nom, description, prix, image } = req.body;
+
+        const product = new Product({
+            nom,
+            description,
+            prix,
+            image
+        });
+
+        await product.save();
+
+        res.json({
+            success: true,
+            message: "Produit ajouté"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
+
+app.get("/products", async (req, res) => {
+
+    const products = await Product.find();
+
+    res.json(products);
+
+});
+
+const Product = require("./models/Product");
+
+app.get("/products", async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (error) {
+        console.log(error);
         res.status(500).json({
             error: error.message
         });
