@@ -109,6 +109,27 @@ app.get("/products", async (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
+app.delete("/product/:id", async (req, res) => {
+
+    try {
+
+        await Product.findByIdAndDelete(req.params.id);
+
+        res.json({
+            success: true,
+            message: "Produit supprimé"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
 
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur ${PORT}`);
