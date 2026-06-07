@@ -70,7 +70,7 @@ async function chargerProduits() {
 
     produits.forEach(p => {
 
-       html += `
+      html += `
 <div class="carte">
     <div class="img">
         <img src="${p.image}" alt="${p.nom}">
@@ -83,10 +83,8 @@ async function chargerProduits() {
     <div class="box">
         <div class="prix">${p.prix} fr</div>
 
-        <button
-            class="achat"
-            data-name="${p.nom}"
-            data-price="${p.prix}">
+        <button class="achat"
+            onclick="ajouterAuPanier('${p.nom}', '${p.prix}')">
             Acheter
         </button>
     </div>
@@ -100,3 +98,32 @@ async function chargerProduits() {
 }
 
 chargerProduits();
+
+function ajouterAuPanier(nom, prix) {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({
+        name: nom,
+        price: prix
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+    const cartCount = document.getElementById("cart-count");
+
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
+
+    alert(nom + " ajouté au panier 🛒");
+}
+
+const cartCount = document.getElementById("cart-count");
+
+if (cartCount) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cartCount.textContent = cart.length;
+}

@@ -107,8 +107,6 @@ app.get("/products", async (req, res) => {
     }
 });
 
-
-const PORT = process.env.PORT || 3000;
 app.delete("/product/:id", async (req, res) => {
 
     try {
@@ -130,6 +128,27 @@ app.delete("/product/:id", async (req, res) => {
     }
 
 });
+
+app.get("/commandes", async (req, res) => {
+
+    try {
+
+        const commandes = await Order.find().sort({ date: -1 });
+
+        res.json(commandes);
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur ${PORT}`);

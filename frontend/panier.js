@@ -44,47 +44,6 @@ function clearCart() {
     displayCart();
 }
 
-async function commander() {
-
-    const nom = document.getElementById("nom").value;
-    const numero = document.getElementById("numero").value;
-    const adresse = document.getElementById("adresse").value;
-
-    if (!nom || !numero || !adresse) {
-        alert("Veuillez remplir tous les champs");
-        return;
-    }
-
-    if (cart.length === 0) {
-        alert("Panier vide");
-        return;
-    }
-
-    const res = await fetch("http://localhost:3000/commande", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nom,
-            numero,
-            adresse,
-            produits: cart
-        })
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-        alert("Commande enregistrée ✅");
-
-        cart = [];
-        localStorage.removeItem("cart");
-        displayCart();
-    } else {
-        alert("Erreur lors de la commande");
-    }
-}
 
 async function commander() {
 
@@ -106,7 +65,7 @@ async function commander() {
 
     try {
 
-        const response = await fetch("http://localhost:3000/commande", {
+        const response = await fetch("https://nawaf-shop-backend.onrender.com/commande", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

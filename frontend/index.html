@@ -33,82 +33,12 @@
     </section>
 
     <h1 class="produits_texte">Nos meilleures ventes</h1>
+        
     <section class="section_produits">
-        <div class="produits">
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="img"><img src="imgs/phon1.jpeg" alt=""></div>
-                <div class="desc">Rizen 5x</div>
-                <div class="titre">pc gamer</div>
-                <div class="box">
-                    <div class="prix">556fr</div>
-                    <button class="achat" data-name="PC Gamer" data-price="556">Acheter</button>
-                </div>
-            </div>
-        </div>
-        <div id="products"></div>
+
+    <div class="produits" id="products">
+
+    </div>
     </section>
     <section class="contactContainer" id="contactMoi">
   <div class="contactTitle">
@@ -137,48 +67,7 @@
     <p>@Créé par Nawaf</p>
 </footer>
 
-<h2>Passer une commande</h2>
 
-<input type="text" id="nom" placeholder="Nom">
-<br><br>
-
-<input type="text" id="numero" placeholder="Numéro">
-<br><br>
-
-<input type="text" id="adresse" placeholder="Adresse">
-<br><br>
-
-<button onclick="envoyerCommande()">
-    Commander
-</button>
-
-<script>
-async function envoyerCommande() {
-
-    const nom = document.getElementById("nom").value;
-    const numero = document.getElementById("numero").value;
-    const adresse = document.getElementById("adresse").value;
-
-    const produits = ["Produit Test"];
-
-    const response = await fetch("http://localhost:3000/commande", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nom,
-            numero,
-            adresse,
-            produits
-        })
-    });
-
-    const data = await response.json();
-
-    alert(data.message);
-}
-</script>
 
 <script src="script.js"></script>
 </body>
