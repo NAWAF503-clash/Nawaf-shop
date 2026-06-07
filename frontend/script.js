@@ -127,3 +127,39 @@ if (cartCount) {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cartCount.textContent = cart.length;
 }
+
+
+let index = 0;
+
+function showSlide() {
+    const slider = document.getElementById("slider");
+    slider.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function next() {
+    const total = document.querySelectorAll(".slide").length;
+    index = (index + 1) % total;
+    showSlide();
+}
+
+function prev() {
+    const total = document.querySelectorAll(".slide").length;
+    index = (index - 1 + total) % total;
+    showSlide();
+}
+
+let startX = 0;
+
+document.getElementById("slider").addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.getElementById("slider").addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if (startX > endX + 50) {
+        next(); // swipe gauche
+    } else if (startX < endX - 50) {
+        prev(); // swipe droite
+    }
+});

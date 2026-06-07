@@ -226,6 +226,68 @@ padding: 0 20px;
     outline: none;
 }
 
+.product-container{
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* GALERIE */
+.gallery{
+    width: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider{
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide{
+    min-width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* zoom effet */
+.slide:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+/* boutons */
+.controls{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.controls button{
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+    .product-container{
+        flex-direction: column;
+    }
+
+    .gallery{
+        width: 100%;
+    }
+
+    .slide{
+        height: 250px;
+    }
+}
 
 /* Adaptation téléphone et tablette */
 

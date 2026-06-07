@@ -97,6 +97,9 @@ async function chargerCommandes() {
             <p>📞 ${c.numero}</p>
             <p>📍 ${c.adresse}</p>
             <p>🛒 ${c.produits.length} produit(s)</p>
+<ul>
+    ${c.produits.map(p => `<li>${p.name} - ${p.price} FCFA</li>`).join("")}
+</ul>
             <hr>
         </div>
         `;
