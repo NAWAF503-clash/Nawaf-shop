@@ -70,34 +70,43 @@ async function chargerProduits() {
 
     produits.forEach(p => {
 
-      html += `
+     html += `
 <div class="carte">
-    <div class="swiper">
+
+    <div class="swiper produitSwiper">
         <div class="swiper-wrapper">
 
             <div class="swiper-slide">
-               <img src="${p.images?.[0] || 'imgs/default.jpg'}">
+                <img src="${p.images?.[0] || ''}"
+                onclick="zoomImage('${p.images?.[0] || ''}')">
             </div>
 
+            ${p.images?.[1] ? `
             <div class="swiper-slide">
-               ${p.images?.[1] ? `<img src="${p.images[1]}">` : ""}
-            </div>
+                <img src="${p.images[1]}"
+                onclick="zoomImage('${p.images?.[1] || ''}')">
+            </div>` : ''}
 
+            ${p.images?.[2] ? `
             <div class="swiper-slide">
-                ${p.images?.[2] ? `<img src="${p.images[2]}">` : ""}
-            </div>
+                <img src="${p.images[2]}"
+                onclick="zoomImage('${p.images?.[2] || ''}')">
+            </div>` : ''}
 
             ${p.video ? `
             <div class="swiper-slide">
-             <video controls width="100%">
-              <source src="${p.video}">
-             </video>
-            </div>
-             ` : ""}
-        </div>
-    </div>
-    <div class="desc">${p.description}</div>
+                <video  class="productVideo" muted controls>
+                    <source src="${p.video}">
+                </video>
+            </div>` : ''}
 
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+    <div class="desc">${p.description}</div>
     <div class="titre">${p.nom}</div>
 
     <div class="box">
@@ -106,16 +115,67 @@ async function chargerProduits() {
         <button class="achat"
             onclick="ajouterAuPanier('${p.nom}', '${p.prix}')">
             Acheter
-          </button>
-         </div>
-     </div>
-        `;
+        </button>
+    </div>
 
+</div>
+`;
     });
 
     document.getElementById("products").innerHTML = html;
 
-}
+    new Swiper(".produitSwiper", {
+    loop: true,
+
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    }
+});
+
+const swipers = document.querySelectorAll(".produitSwiper");
+
+swipers.forEach(swiperElement => {
+
+    const swiper = new Swiper(swiperElement, {
+
+        loop: true,
+
+        pagination: {
+            el: swiperElement.querySelector(".swiper-pagination"),
+            clickable: true
+        },
+
+        on: {
+
+            slideChange: function() {
+
+                const videos =
+                    swiperElement.querySelectorAll("video");
+
+                videos.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+
+                const activeSlide =
+                    this.slides[this.activeIndex];
+
+                const video =
+                    activeSlide.querySelector("video");
+
+                if(video){
+
+                    video.play();
+
+                }
+
+            }
+        }
+    });
+
+});
+ }
 
 chargerProduits();
 
