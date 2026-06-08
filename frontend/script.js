@@ -72,10 +72,30 @@ async function chargerProduits() {
 
       html += `
 <div class="carte">
-    <div class="img">
-        <img src="${p.image}" alt="${p.nom}">
-    </div>
+    <div class="swiper">
+        <div class="swiper-wrapper">
 
+            <div class="swiper-slide">
+               <img src="${p.images?.[0] || 'imgs/default.jpg'}">
+            </div>
+
+            <div class="swiper-slide">
+               ${p.images?.[1] ? `<img src="${p.images[1]}">` : ""}
+            </div>
+
+            <div class="swiper-slide">
+                ${p.images?.[2] ? `<img src="${p.images[2]}">` : ""}
+            </div>
+
+            ${p.video ? `
+            <div class="swiper-slide">
+             <video controls width="100%">
+              <source src="${p.video}">
+             </video>
+            </div>
+             ` : ""}
+        </div>
+    </div>
     <div class="desc">${p.description}</div>
 
     <div class="titre">${p.nom}</div>
@@ -86,10 +106,10 @@ async function chargerProduits() {
         <button class="achat"
             onclick="ajouterAuPanier('${p.nom}', '${p.prix}')">
             Acheter
-        </button>
-    </div>
-</div>
-`;
+          </button>
+         </div>
+     </div>
+        `;
 
     });
 
@@ -107,8 +127,6 @@ function ajouterAuPanier(nom, prix) {
         name: nom,
         price: prix
     });
-
-    localStorage.setItem("cart", JSON.stringify(cart));
 
       localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -129,37 +147,3 @@ if (cartCount) {
 }
 
 
-let index = 0;
-
-function showSlide() {
-    const slider = document.getElementById("slider");
-    slider.style.transform = `translateX(-${index * 100}%)`;
-}
-
-function next() {
-    const total = document.querySelectorAll(".slide").length;
-    index = (index + 1) % total;
-    showSlide();
-}
-
-function prev() {
-    const total = document.querySelectorAll(".slide").length;
-    index = (index - 1 + total) % total;
-    showSlide();
-}
-
-let startX = 0;
-
-document.getElementById("slider").addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
-
-document.getElementById("slider").addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-
-    if (startX > endX + 50) {
-        next(); // swipe gauche
-    } else if (startX < endX - 50) {
-        prev(); // swipe droite
-    }
-});

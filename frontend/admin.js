@@ -4,7 +4,10 @@ async function ajouterProduit() {
 const nom = document.getElementById("nom").value;
 const description = document.getElementById("description").value;
 const prix = document.getElementById("prix").value;
-const image = document.getElementById("image").value;
+const image1 = document.getElementById("image1").value;
+const image2 = document.getElementById("image2").value;
+const image3 = document.getElementById("image3").value;
+const video = document.getElementById("video").value;
 
 const response = await fetch(
     "https://nawaf-shop-backend.onrender.com/add-product",
@@ -17,7 +20,8 @@ const response = await fetch(
             nom,
             description,
             prix,
-            image
+            images: [image1, image2, image3],
+            video
         })
     }
 );
@@ -107,6 +111,7 @@ async function chargerCommandes() {
 
     document.getElementById("listeCommandes").innerHTML = html;
 }
+ 
 
 chargerProduits();
 chargerCommandes();

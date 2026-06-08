@@ -66,13 +66,14 @@ app.post("/add-product", async (req, res) => {
 
     try {
 
-        const { nom, description, prix, image } = req.body;
+        const { nom, description, prix, images, video } = req.body;
 
         const product = new Product({
             nom,
             description,
             prix,
-            image
+            images,
+            video
         });
 
         await product.save();
