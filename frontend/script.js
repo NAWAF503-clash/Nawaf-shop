@@ -125,7 +125,7 @@ async function chargerProduits() {
     document.getElementById("products").innerHTML = html;
 
     new Swiper(".produitSwiper", {
-    loop: true,
+    loop: false,
 
     pagination: {
         el: ".swiper-pagination",
@@ -139,7 +139,7 @@ swipers.forEach(swiperElement => {
 
     const swiper = new Swiper(swiperElement, {
 
-        loop: true,
+        loop: false,
 
         pagination: {
             el: swiperElement.querySelector(".swiper-pagination"),
