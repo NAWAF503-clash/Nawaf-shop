@@ -3,36 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>Admin Nawaf Shop</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f5f5f5;
+            padding:20px;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            margin-bottom:30px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        input, textarea{
+            width:100%;
+            padding:12px;
+            margin-top:10px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            margin-top:15px;
+            padding:12px 20px;
+            border:none;
+            background:black;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        .products{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .product{
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+        }
+
+        .product-content{
+            padding:15px;
+        }
+
+        .commande{
+            background:white;
+            padding:15px;
+            border-radius:10px;
+            margin-top:10px;
+        }
+
+    </style>
+
 </head>
 <body>
-    <h1>Ajouter un produit</h1>
 
-<input type="text" id="nom" placeholder="Nom">
+<div class="container">
 
-<input type="text" id="description" placeholder="Description">
+    <div class="card">
 
-<input type="number" id="prix" placeholder="Prix">
+        <h2>Ajouter un produit</h2>
 
-<input type="text" id="image1" placeholder="URL image 1">
+        <input type="text" id="nom" placeholder="Nom produit">
 
-<input type="text" id="image2" placeholder="URL image 2">
+        <textarea id="description" placeholder="Description"></textarea>
 
-<input type="text" id="image3" placeholder="URL image 3">
+        <input type="number" id="prix" placeholder="Prix">
 
-<input type="text" id="video" placeholder="URL vidéo">
+        <input type="text" id="image1" placeholder="URL image 1">
 
-<button onclick="ajouterProduit()">
-Ajouter
+        <input type="text" id="image2" placeholder="URL image 2">
+
+        <input type="text" id="image3" placeholder="URL image 3">
+
+        <input type="text" id="video" placeholder="URL vidéo">
+
+        <button onclick="ajouterProduit()">
+            Ajouter produit
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Produits</h2>
+
+        <div class="products" id="listeProduits"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Commandes</h2>
+
+        <button onclick="viderCommandes()">
+    Effacer historique commandes
 </button>
-<h2>Liste des produits</h2>
 
-<div id="listeProduits"></div>
+        <div id="listeCommandes"></div>
 
-<h2>Commandes</h2>
+    </div>
 
-<div id="listeCommandes"></div>
+</div>
 
 <script src="admin.js"></script>
+
 </body>
 </html>

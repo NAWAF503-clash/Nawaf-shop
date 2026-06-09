@@ -149,6 +149,46 @@ app.get("/commandes", async (req, res) => {
 
 });
 
+app.delete("/commande/:id", async (req, res) => {
+
+    try {
+
+        await Order.findByIdAndDelete(req.params.id);
+
+        res.json({
+            success:true,
+            message:"Commande supprimée"
+        });
+
+    } catch(error){
+
+        res.status(500).json({
+            success:false,
+            message:error.message
+        });
+    }
+});
+
+app.delete("/commandes", async (req, res) => {
+
+    try {
+
+        await Order.deleteMany();
+
+        res.json({
+            success:true,
+            message:"Historique supprimé"
+        });
+
+    } catch(error){
+
+        res.status(500).json({
+            success:false,
+            message:error.message
+        });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

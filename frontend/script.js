@@ -124,14 +124,7 @@ async function chargerProduits() {
 
     document.getElementById("products").innerHTML = html;
 
-    new Swiper(".produitSwiper", {
-    loop: false,
-
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-    }
-});
+   
 
 const swipers = document.querySelectorAll(".produitSwiper");
 
@@ -207,3 +200,15 @@ if (cartCount) {
 }
 
 
+function zoomImage(src){
+
+    const modal = document.getElementById("zoomModal");
+    const img = document.getElementById("zoomImage");
+
+    img.src = src;
+    modal.style.display = "block";
+}
+
+document.querySelector(".closeZoom").onclick = () => {
+    document.getElementById("zoomModal").style.display = "none";
+};
