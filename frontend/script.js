@@ -57,12 +57,14 @@ async function chargerProduits() {
 
     let html = "";
 
+
     produits.forEach(p => {
 
-     html += `
+html += `
 <div class="carte">
 
     <div class="swiper produitSwiper">
+
         <div class="swiper-wrapper">
 
             <div class="swiper-slide">
@@ -73,21 +75,24 @@ async function chargerProduits() {
             ${p.images?.[1] ? `
             <div class="swiper-slide">
                 <img src="${p.images[1]}"
-                onclick="zoomImage('${p.images?.[1] || ''}')">
-            </div>` : ''}
+                onclick="zoomImage('${p.images[1]}')">
+            </div>
+            ` : ''}
 
             ${p.images?.[2] ? `
             <div class="swiper-slide">
                 <img src="${p.images[2]}"
-                onclick="zoomImage('${p.images?.[2] || ''}')">
-            </div>` : ''}
+                onclick="zoomImage('${p.images[2]}')">
+            </div>
+            ` : ''}
 
             ${p.video ? `
             <div class="swiper-slide">
-                <video  class="productVideo" muted controls>
+                <video class="productVideo" muted controls>
                     <source src="${p.video}">
                 </video>
-            </div>` : ''}
+            </div>
+            ` : ''}
 
         </div>
 
@@ -96,25 +101,29 @@ async function chargerProduits() {
     </div>
 
     <div class="desc">${p.description}</div>
+
     <div class="titre">${p.nom}</div>
 
     <div class="box">
-        <div class="prix">${p.prix} fr</div>
+
+        <div class="prix">${p.prix} FCFA</div>
 
         <button class="achat"
-onclick="ajouterAuPanier(
-'${p.nom}',
-'${p.prix}',
-'${p.images?.[0] || ""}'
-)">
-Acheter
-</button>
-       
+        onclick="ajouterAuPanier(
+        '${p.nom}',
+        '${p.prix}',
+        '${p.images?.[0] || ""}'
+        )">
+            Acheter
+        </button>
+
     </div>
 
 </div>
 `;
-    });
+
+});
+
 
     document.getElementById("products").innerHTML = html;
 
