@@ -107,14 +107,28 @@ async function chargerCommandes(){
 
             produitsHTML += `
             <div style="
-                border:1px solid #ddd;
-                padding:10px;
-                margin-top:10px;
-                border-radius:8px;">
+            border:1px solid #ddd;
+            padding:10px;
+            margin-top:10px;
+            border-radius:8px;">
+
+                <img src="${p.image}"
+                style="
+                width:80px;
+                height:80px;
+                object-fit:cover;
+                border-radius:8px;
+                ">
 
                 <h4>${p.name}</h4>
 
                 <p>💰 ${p.price} FCFA</p>
+
+                <p>📦 Quantité : ${p.quantity}</p>
+
+                <p>🎨 Couleur : ${p.couleur}</p>
+
+                <p>📏 Taille : ${p.taille}</p>
 
             </div>
             `;
@@ -129,6 +143,16 @@ async function chargerCommandes(){
 
             <p>📍 ${c.adresse}</p>
 
+            <p>
+                📅 Date :
+                ${new Date(c.date).toLocaleString()}
+            </p>
+
+            <p>
+                📦 Statut :
+                <b>${c.statut}</b>
+            </p>
+
             <h4>Produits :</h4>
 
             ${produitsHTML}
@@ -137,8 +161,12 @@ async function chargerCommandes(){
                 Total : ${total} FCFA
             </h2>
 
+            <button onclick="changerStatut('${c._id}')">
+                Marquer livré
+            </button>
+
             <button onclick="supprimerCommande('${c._id}')">
-                Supprimer commande
+                Supprimer
             </button>
 
         </div>
@@ -172,6 +200,18 @@ async function viderCommandes(){
         "https://nawaf-shop-backend.onrender.com/commandes",
         {
             method:"DELETE"
+        }
+    );
+
+    chargerCommandes();
+}
+
+async function changerStatut(id){
+
+    await fetch(
+        `https://nawaf-shop-backend.onrender.com/commande/${id}`,
+        {
+            method:"PUT"
         }
     );
 

@@ -189,7 +189,54 @@ app.delete("/commandes", async (req, res) => {
     }
 });
 
+app.put("/commande/:id", async (req,res)=>{
+
+    try{
+
+        await Order.findByIdAndUpdate(
+            req.params.id,
+            {
+                statut:"Livré"
+            }
+        );
+
+        res.json({
+            success:true
+        });
+
+    }catch(error){
+
+        res.status(500).json({
+            success:false
+        });
+    }
+});
+
+
 const PORT = process.env.PORT || 3000;
+
+app.put("/commande/:id", async (req,res)=>{
+
+    try{
+
+        await Order.findByIdAndUpdate(
+            req.params.id,
+            {
+                statut:"Livré"
+            }
+        );
+
+        res.json({
+            success:true
+        });
+
+    }catch(error){
+
+        res.status(500).json({
+            success:false
+        });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur ${PORT}`);

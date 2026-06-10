@@ -5,6 +5,11 @@ const OrderSchema = new mongoose.Schema({
     numero: String,
     adresse: String,
     produits: Array,
+      statut:{
+        type:String,
+        default:"En attente"
+    },
+
     date: {
         type: Date,
         default: Date.now

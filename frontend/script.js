@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const name = this.dataset.name;
             const price = this.dataset.price;
 
-            cart.push({ name, price });
+            cart.push({
+    name: nom,
+    price: prix,
+    image: image,
+    quantity: 1,
+    couleur: "Noir",
+    taille: "Standard"
+});
             localStorage.setItem("cart", JSON.stringify(cart));
 
             updateCartCount();
@@ -113,7 +120,11 @@ async function chargerProduits() {
         <div class="prix">${p.prix} fr</div>
 
         <button class="achat"
-            onclick="ajouterAuPanier('${p.nom}', '${p.prix}')">
+            onclick="ajouterAuPanier(
+'${p.nom}',
+'${p.prix}',
+'${p.images?.[0] || ""}'
+)">
             Acheter
         </button>
     </div>
@@ -172,22 +183,34 @@ swipers.forEach(swiperElement => {
 
 chargerProduits();
 
-function ajouterAuPanier(nom, prix) {
+function ajouterAuPanier(nom, prix, image) {
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.push({
-        name: nom,
-        price: prix
-    });
+    const produitExistant = cart.find(
+        p => p.name === nom
+    );
 
-      localStorage.setItem("cart", JSON.stringify(cart));
+    if(produitExistant){
 
-    const cartCount = document.getElementById("cart-count");
+        produitExistant.quantity += 1;
 
-    if (cartCount) {
-        cartCount.textContent = cart.length;
+    }else{
+
+        cart.push({
+            name: nom,
+            price: prix,
+            image: image,
+            quantity: 1,
+            couleur: "Noir",
+            taille: "Standard"
+        });
     }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    document.getElementById("cart-count").textContent =
+        cart.length;
 
     alert(nom + " ajouté au panier 🛒");
 }
