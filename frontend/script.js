@@ -2,35 +2,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartCount = document.getElementById("cart-count");
-    const buttons = document.querySelectorAll(".achat");
-
-    updateCartCount();
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            const name = this.dataset.name;
-            const price = this.dataset.price;
-
-            cart.push({
-    name: nom,
-    price: prix,
-    image: image,
-    quantity: 1,
-    couleur: "Noir",
-    taille: "Standard"
-});
-            localStorage.setItem("cart", JSON.stringify(cart));
-
-            updateCartCount();
-            alert(name + " ajouté au panier 🛒");
-        });
-    });
-
-    function updateCartCount() {
+    
+  if(cartCount){
         cartCount.textContent = cart.length;
     }
 
 });
+
+    updateCartCount();
+
+   
+       
 
 function searchProduct() {
 
@@ -120,18 +102,14 @@ async function chargerProduits() {
         <div class="prix">${p.prix} fr</div>
 
         <button class="achat"
-            onclick="ajouterAuPanier(
+onclick="ajouterAuPanier(
 '${p.nom}',
 '${p.prix}',
-<p>🎨 ${p.couleur}</p>
-
-<p>📏 ${p.taille}</p>
-
-<p>📦 Stock : ${p.stock}</p>
 '${p.images?.[0] || ""}'
 )">
-            Acheter
-        </button>
+Acheter
+</button>
+       
     </div>
 
 </div>
@@ -200,7 +178,7 @@ function ajouterAuPanier(nom, prix, image) {
 
         produitExistant.quantity += 1;
 
-    }else{
+    } else {
 
         cart.push({
             name: nom,
@@ -214,11 +192,16 @@ function ajouterAuPanier(nom, prix, image) {
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    document.getElementById("cart-count").textContent =
-        cart.length;
+    const cartCount =
+        document.getElementById("cart-count");
+
+    if(cartCount){
+        cartCount.textContent = cart.length;
+    }
 
     alert(nom + " ajouté au panier 🛒");
 }
+
 
 const cartCount = document.getElementById("cart-count");
 
