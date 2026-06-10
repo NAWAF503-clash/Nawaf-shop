@@ -10,6 +10,12 @@ async function ajouterProduit() {
 
     const video = document.getElementById("video").value;
 
+    const couleur =document.getElementById("couleur").value;
+
+    const taille =document.getElementById("taille").value;
+
+    const stock =document.getElementById("stock").value;
+
     const response = await fetch(
         "https://nawaf-shop-backend.onrender.com/add-product",
         {
@@ -21,6 +27,9 @@ async function ajouterProduit() {
                 nom,
                 description,
                 prix,
+                couleur,
+                taille,
+                stock,
                 images:[image1,image2,image3],
                 video
             })

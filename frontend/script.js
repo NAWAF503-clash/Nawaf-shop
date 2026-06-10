@@ -123,6 +123,11 @@ async function chargerProduits() {
             onclick="ajouterAuPanier(
 '${p.nom}',
 '${p.prix}',
+<p>🎨 ${p.couleur}</p>
+
+<p>📏 ${p.taille}</p>
+
+<p>📦 Stock : ${p.stock}</p>
 '${p.images?.[0] || ""}'
 )">
             Acheter

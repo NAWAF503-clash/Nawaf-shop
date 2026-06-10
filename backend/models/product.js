@@ -6,6 +6,9 @@ const ProductSchema = new mongoose.Schema({
     prix: Number,
     images: [String],
     video: String,
+    couleur: String,
+    taille: String,
+    stock: Number,
     date: {
         type: Date,
         default: Date.now
