@@ -73,7 +73,10 @@ app.post("/add-product", async (req, res) => {
             description,
             prix,
             images,
-            video
+            video,
+            couleur,
+            taille,
+            stock
         });
 
         await product.save();
