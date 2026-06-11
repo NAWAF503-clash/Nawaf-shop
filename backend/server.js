@@ -66,7 +66,7 @@ app.post("/add-product", async (req, res) => {
 
     try {
 
-        const { nom, description, prix, images, video, couleur, taille, stock } = req.body;
+        const { nom, description, prix, images, video, couleurs, tailles, stock } = req.body;
 
         const product = new Product({
             nom,
@@ -74,8 +74,8 @@ app.post("/add-product", async (req, res) => {
             prix,
             images,
             video,
-            couleur,
-            taille,
+            couleurs,
+            tailles,
             stock
         });
 
