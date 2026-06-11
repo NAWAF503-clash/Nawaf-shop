@@ -10,9 +10,15 @@ async function ajouterProduit() {
 
     const video = document.getElementById("video").value;
 
-    const couleur =document.getElementById("couleur").value;
+    const couleurs =
+document.getElementById("couleurs")
+.value
+.split(",");
 
-    const taille =document.getElementById("taille").value;
+const tailles =
+document.getElementById("tailles")
+.value
+.split(",");
 
     const stock =document.getElementById("stock").value;
 
@@ -27,9 +33,10 @@ async function ajouterProduit() {
                 nom,
                 description,
                 prix,
-                couleur,
-                taille,
+                couleurs,
+                tailles,
                 stock,
+            
                 images:[image1,image2,image3],
                 video
             })
