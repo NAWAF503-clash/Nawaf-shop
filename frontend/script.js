@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-    updateCartCount();
-
    
        
 
@@ -57,135 +55,185 @@ async function chargerProduits() {
 
     let html = "";
 
-
     produits.forEach(p => {
 
-html += `
-<div class="carte">
+        html += `
+        <div class="carte">
 
-    <div class="swiper produitSwiper">
+            <div class="swiper produitSwiper">
 
-        <div class="swiper-wrapper">
+                <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-                <img src="${p.images?.[0] || ''}"
-                onclick="zoomImage('${p.images?.[0] || ''}')">
+                    <div class="swiper-slide">
+                        <img src="${p.images?.[0] || ''}"
+                        onclick="zoomImage('${p.images?.[0] || ''}')">
+                    </div>
+
+                    ${p.images?.[1] ? `
+                    <div class="swiper-slide">
+                        <img src="${p.images[1]}"
+                        onclick="zoomImage('${p.images[1]}')">
+                    </div>
+                    ` : ''}
+
+                    ${p.images?.[2] ? `
+                    <div class="swiper-slide">
+                        <img src="${p.images[2]}"
+                        onclick="zoomImage('${p.images[2]}')">
+                    </div>
+                    ` : ''}
+
+                    ${p.video ? `
+                    <div class="swiper-slide">
+                        <video class="productVideo"
+                        muted controls>
+                            <source src="${p.video}">
+                        </video>
+                    </div>
+                    ` : ''}
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+
             </div>
 
-            ${p.images?.[1] ? `
-            <div class="swiper-slide">
-                <img src="${p.images[1]}"
-                onclick="zoomImage('${p.images[1]}')">
-            </div>
-            ` : ''}
+            <div class="desc">${p.description}</div>
 
-            ${p.images?.[2] ? `
-            <div class="swiper-slide">
-                <img src="${p.images[2]}"
-                onclick="zoomImage('${p.images[2]}')">
-            </div>
-            ` : ''}
+            <div class="titre">${p.nom}</div>
 
-            ${p.video ? `
-            <div class="swiper-slide">
-                <video class="productVideo" muted controls>
-                    <source src="${p.video}">
-                </video>
-            </div>
-            ` : ''}
+            <div class="box">
 
-        </div>
-
-        <div class="swiper-pagination"></div>
-
-    </div>
-
-    <div class="desc">${p.description}</div>
-
-    <div class="titre">${p.nom}</div>
-
-    <div class="box">
-
-        <div class="prix">${p.prix} FCFA</div>
-
-        <button class="achat"
-        onclick="ajouterAuPanier(
-        '${p.nom}',
-        '${p.prix}',
-        '${p.images?.[0] || ""}'
-        )">
-            Acheter
-        </button>
-
+    <div class="prix">
+        ${p.prix} FCFA
     </div>
 
 </div>
-`;
 
-});
+${p.couleurs && p.couleurs.length > 0 ? `
+<select id="couleur-${p._id}">
+    ${p.couleurs.map(c =>
+        `<option value="${c}">${c}</option>`
+    ).join("")}
+</select>
+` : ''}
 
+${p.tailles && p.tailles.length > 0 ? `
+<select id="taille-${p._id}">
+    ${p.tailles.map(t =>
+        `<option value="${t}">${t}</option>`
+    ).join("")}
+</select>
+` : ''}
+
+<input
+type="number"
+id="quantite-${p._id}"
+value="1"
+min="1">
+
+<button class="achat"
+onclick="ajouterAuPanier(
+'${p.nom}',
+'${p.prix}',
+'${p.images?.[0] || ""}',
+'${p._id}'
+)">
+Acheter
+</button>
+
+            </div>
+
+        </div>
+        `;
+
+    });
 
     document.getElementById("products").innerHTML = html;
 
-   
+    const swipers =
+        document.querySelectorAll(".produitSwiper");
 
-const swipers = document.querySelectorAll(".produitSwiper");
+    swipers.forEach(swiperElement => {
 
-swipers.forEach(swiperElement => {
+        new Swiper(swiperElement, {
 
-    const swiper = new Swiper(swiperElement, {
+            loop: false,
 
-        loop: false,
+            pagination: {
+                el: swiperElement.querySelector(
+                    ".swiper-pagination"
+                ),
+                clickable: true
+            },
 
-        pagination: {
-            el: swiperElement.querySelector(".swiper-pagination"),
-            clickable: true
-        },
+            on: {
 
-        on: {
+                slideChange: function() {
 
-            slideChange: function() {
+                    const videos =
+                        swiperElement.querySelectorAll(
+                            "video"
+                        );
 
-                const videos =
-                    swiperElement.querySelectorAll("video");
+                    videos.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
 
-                videos.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
+                    const activeSlide =
+                        this.slides[this.activeIndex];
 
-                const activeSlide =
-                    this.slides[this.activeIndex];
+                    const video =
+                        activeSlide.querySelector("video");
 
-                const video =
-                    activeSlide.querySelector("video");
-
-                if(video){
-
-                    video.play();
+                    if(video){
+                        video.play();
+                    }
 
                 }
-
             }
-        }
+
+        });
+
     });
 
-});
- }
+}
 
 chargerProduits();
 
-function ajouterAuPanier(nom, prix, image) {
+function ajouterAuPanier(nom, prix, image, id) {
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    const couleurElement =
+    document.getElementById(`couleur-${id}`);
+
+const tailleElement =
+    document.getElementById(`taille-${id}`);
+
+const couleur =
+    couleurElement ? couleurElement.value : "";
+
+const taille =
+    tailleElement ? tailleElement.value : "";
+
+    const quantite =
+        Number(
+            document.getElementById(`quantite-${id}`).value
+        );
 
     const produitExistant = cart.find(
-        p => p.name === nom
+        p =>
+        p.name === nom &&
+        p.couleur === couleur &&
+        p.taille === taille
     );
 
     if(produitExistant){
 
-        produitExistant.quantity += 1;
+        produitExistant.quantity += quantite;
 
     } else {
 
@@ -193,10 +241,11 @@ function ajouterAuPanier(nom, prix, image) {
             name: nom,
             price: prix,
             image: image,
-            quantity: 1,
-            couleur: "Noir",
-            taille: "Standard"
+            quantity: quantite,
+            couleur: couleur,
+            taille: taille
         });
+
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -210,7 +259,6 @@ function ajouterAuPanier(nom, prix, image) {
 
     alert(nom + " ajouté au panier 🛒");
 }
-
 
 const cartCount = document.getElementById("cart-count");
 
