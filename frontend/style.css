@@ -338,6 +338,28 @@ cursor: pointer;
     border:1px solid #ccc;
 }
 
+.options{
+    display:flex;
+    gap:8px;
+    padding:10px 15px;
+    flex-wrap:wrap;
+}
+
+.options select,
+.options input{
+
+    padding:6px 10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:12px;
+    background:white;
+    outline:none;
+}
+
+.options input{
+    width:55px;
+}
+
 /* MOBILE */
 @media (max-width: 768px){
     .product-container{

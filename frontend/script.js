@@ -102,6 +102,32 @@ async function chargerProduits() {
 
             <div class="titre">${p.nom}</div>
 
+            <div class="options">
+
+${p.couleurs && p.couleurs.length > 0 ? `
+<select id="couleur-${p._id}">
+    ${p.couleurs.map(c =>
+        `<option value="${c}">${c}</option>`
+    ).join("")}
+</select>
+` : ''}
+
+${p.tailles && p.tailles.length > 0 ? `
+<select id="taille-${p._id}">
+    ${p.tailles.map(t =>
+        `<option value="${t}">${t}</option>`
+    ).join("")}
+</select>
+` : ''}
+
+<input
+type="number"
+id="quantite-${p._id}"
+value="1"
+min="1">
+
+</div>
+
             <div class="box">
 
     <div class="prix">
@@ -202,60 +228,49 @@ Acheter
 
 chargerProduits();
 
-function ajouterAuPanier(nom, prix, image, id) {
+function ajouterAuPanier(id, nom, prix, image) {
 
     let cart =
-        JSON.parse(localStorage.getItem("cart")) || [];
+    JSON.parse(localStorage.getItem("cart")) || [];
 
-    const couleurElement =
-    document.getElementById(`couleur-${id}`);
-
-const tailleElement =
-    document.getElementById(`taille-${id}`);
-
-const couleur =
-    couleurElement ? couleurElement.value : "";
-
-const taille =
-    tailleElement ? tailleElement.value : "";
-
-    const quantite =
-        Number(
-            document.getElementById(`quantite-${id}`).value
-        );
-
-    const produitExistant = cart.find(
-        p =>
-        p.name === nom &&
-        p.couleur === couleur &&
-        p.taille === taille
+    const quantity = Number(
+        document.getElementById(`quantite-${id}`).value
     );
 
-    if(produitExistant){
+    const couleurSelect =
+    document.getElementById(`couleur-${id}`);
 
-        produitExistant.quantity += quantite;
+    const tailleSelect =
+    document.getElementById(`taille-${id}`);
 
-    } else {
+    const couleur =
+    couleurSelect ? couleurSelect.value : "";
 
-        cart.push({
-            name: nom,
-            price: prix,
-            image: image,
-            quantity: quantite,
-            couleur: couleur,
-            taille: taille
-        });
+    const taille =
+    tailleSelect ? tailleSelect.value : "";
 
-    }
+    cart.push({
+
+        name: nom,
+
+        unitPrice: Number(prix),
+
+        price: Number(prix) * quantity,
+
+        image: image,
+
+        quantity: quantity,
+
+        couleur: couleur,
+
+        taille: taille
+
+    });
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    const cartCount =
-        document.getElementById("cart-count");
-
-    if(cartCount){
-        cartCount.textContent = cart.length;
-    }
+    document.getElementById("cart-count")
+    .textContent = cart.length;
 
     alert(nom + " ajouté au panier 🛒");
 }
@@ -280,3 +295,16 @@ function zoomImage(src){
 document.querySelector(".closeZoom").onclick = () => {
     document.getElementById("zoomModal").style.display = "none";
 };
+
+const zoomModal =
+document.getElementById("zoomModal");
+
+zoomModal.addEventListener("click", function(e){
+
+    if(e.target === zoomModal){
+
+        zoomModal.style.display = "none";
+
+    }
+
+});

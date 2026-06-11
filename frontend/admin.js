@@ -79,6 +79,10 @@ async function chargerProduits(){
                     Supprimer
                 </button>
 
+                <button onclick="modifierProduit('${p._id}')">
+                    Modifier
+                </button>
+
             </div>
 
         </div>
