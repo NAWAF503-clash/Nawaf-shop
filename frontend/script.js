@@ -105,26 +105,44 @@ async function chargerProduits() {
             <div class="options">
 
 ${p.couleurs && p.couleurs.length > 0 ? `
-<select id="couleur-${p._id}">
+<div class="option-box">
+
+<label>Couleur</label>
+
+<select id="color-${p._id}">
     ${p.couleurs.map(c =>
         `<option value="${c}">${c}</option>`
     ).join("")}
 </select>
+
+</div>
 ` : ''}
 
 ${p.tailles && p.tailles.length > 0 ? `
-<select id="taille-${p._id}">
+<div class="option-box">
+
+<label>Taille</label>
+
+<select id="size-${p._id}">
     ${p.tailles.map(t =>
         `<option value="${t}">${t}</option>`
     ).join("")}
 </select>
+
+</div>
 ` : ''}
+
+<div class="option-box">
+
+<label>Qté</label>
 
 <input
 type="number"
-id="quantite-${p._id}"
+id="qty-${p._id}"
 value="1"
 min="1">
+
+</div>
 
 </div>
 
@@ -212,14 +230,14 @@ function ajouterAuPanier(id, nom, prix, image) {
     JSON.parse(localStorage.getItem("cart")) || [];
 
     const quantity = Number(
-        document.getElementById(`quantite-${id}`).value
+       document.getElementById(`qty-${id}`).value
     );
 
     const couleurSelect =
-    document.getElementById(`couleur-${id}`);
+    document.getElementById(`color-${id}`);
 
     const tailleSelect =
-    document.getElementById(`taille-${id}`);
+    document.getElementById(`size-${id}`);
 
     const couleur =
     couleurSelect ? couleurSelect.value : "";
@@ -263,26 +281,42 @@ if (cartCount) {
 
 function zoomImage(src){
 
-    const modal = document.getElementById("zoomModal");
-    const img = document.getElementById("zoomImage");
+    const modal =
+    document.getElementById("zoomModal");
+
+    const img =
+    document.getElementById("zoomImage");
 
     img.src = src;
-    modal.style.display = "block";
+
+    modal.style.display = "flex";
 }
 
-document.querySelector(".closeZoom").onclick = () => {
-    document.getElementById("zoomModal").style.display = "none";
-};
+/* attendre chargement HTML */
+window.addEventListener("DOMContentLoaded", () => {
 
-const zoomModal =
-document.getElementById("zoomModal");
+    const modal =
+    document.getElementById("zoomModal");
 
-zoomModal.addEventListener("click", function(e){
+    const closeBtn =
+    document.querySelector(".closeZoom");
 
-    if(e.target === zoomModal){
+    /* fermer avec X */
+    closeBtn.addEventListener("click", () => {
 
-        zoomModal.style.display = "none";
+        modal.style.display = "none";
 
-    }
+    });
+
+    /* fermer fond noir */
+    modal.addEventListener("click", (e) => {
+
+        if(e.target === modal){
+
+            modal.style.display = "none";
+
+        }
+
+    });
 
 });

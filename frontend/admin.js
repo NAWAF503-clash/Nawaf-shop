@@ -240,14 +240,40 @@ async function changerStatut(id){
 
 async function modifierProduit(id){
 
-    const nouveauPrix =
-    prompt("Entrer le nouveau prix");
+    const nom =
+    prompt("Nouveau nom");
 
-    if(!nouveauPrix) return;
+    const description =
+    prompt("Nouvelle description");
+
+    const prix =
+    prompt("Nouveau prix");
+
+    const image1 =
+    prompt("Image 1 URL");
+
+    const image2 =
+    prompt("Image 2 URL");
+
+    const image3 =
+    prompt("Image 3 URL");
+
+    const video =
+    prompt("URL vidéo");
+
+    const couleurs =
+    prompt("Couleurs séparées par virgule");
+
+    const tailles =
+    prompt("Tailles séparées par virgule");
+
+    const stock =
+    prompt("Quantité stock");
 
     await fetch(
         `https://nawaf-shop-backend.onrender.com/product/${id}`,
         {
+
             method:"PUT",
 
             headers:{
@@ -255,8 +281,29 @@ async function modifierProduit(id){
             },
 
             body:JSON.stringify({
-                prix:nouveauPrix
+
+                nom,
+
+                description,
+
+                prix,
+
+                images:[
+                    image1,
+                    image2,
+                    image3
+                ],
+
+                video,
+
+                couleurs: couleurs.split(","),
+
+                tailles: tailles.split(","),
+
+                stock
+
             })
+
         }
     );
 
