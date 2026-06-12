@@ -237,3 +237,30 @@ async function changerStatut(id){
 
     chargerCommandes();
 }
+
+async function modifierProduit(id){
+
+    const nouveauPrix =
+    prompt("Entrer le nouveau prix");
+
+    if(!nouveauPrix) return;
+
+    await fetch(
+        `https://nawaf-shop-backend.onrender.com/product/${id}`,
+        {
+            method:"PUT",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                prix:nouveauPrix
+            })
+        }
+    );
+
+    alert("Produit modifié");
+
+    chargerProduits();
+}

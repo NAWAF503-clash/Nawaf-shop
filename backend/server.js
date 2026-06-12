@@ -241,6 +241,32 @@ app.put("/commande/:id", async (req,res)=>{
     }
 });
 
+app.put("/product/:id", async (req,res)=>{
+
+    try{
+
+        await Product.findByIdAndUpdate(
+            req.params.id,
+            req.body
+        );
+
+        res.json({
+            success:true,
+            message:"Produit modifié"
+        });
+
+    }catch(error){
+
+        res.status(500).json({
+            success:false,
+            message:error.message
+        });
+
+    }
+
+});
+
+
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur ${PORT}`);
 });
