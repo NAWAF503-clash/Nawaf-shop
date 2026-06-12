@@ -17,19 +17,48 @@ function displayCart() {
 
         const div = document.createElement("div");
 
-        div.innerHTML = `
-            <p>
-                ${item.name} - ${item.price} fr
-                <button onclick="removeItem(${index})">
-                    Supprimer
-                </button>
-            </p>
-        `;
+      div.classList.add("cart-item");
+
+div.innerHTML = `
+
+    <img src="${item.image}">
+
+    <div class="cart-info">
+
+        <h3>${item.name}</h3>
+
+        <p>🎨 Couleur : ${item.couleur || "-"}</p>
+
+        <p>📏 Taille : ${item.taille || "-"}</p>
+
+        <p>📦 Quantité : ${item.quantity}</p>
+
+    </div>
+
+    <div class="cart-price">
+
+        ${item.price} FCFA
+
+    </div>
+
+    <div class="cart-actions">
+
+        <button
+        class="delete-btn"
+        onclick="removeItem(${index})">
+
+            Supprimer
+
+        </button>
+
+    </div>
+
+`;
 
         cartItemsContainer.appendChild(div);
     });
 
-    totalElement.textContent = total;
+    totalElement.textContent =  "Total : " + total + " FCFA";
 }
 
 function removeItem(index) {

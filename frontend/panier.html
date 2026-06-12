@@ -1,43 +1,92 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
     <title>Panier</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body class="panier">
 
-<div class="panier-container">
+    <div class="panier-container">
 
-    <h1 class="panier-title">
-        Mon Panier 🛒
-    </h1>
+        <h1 class="panier-title">
+            Mon Panier 🛒
+        </h1>
 
-    <div id="cart-items"></div>
+        <!-- PRODUITS -->
+        <div id="cart-items"></div>
 
-    <div class="cart-total" id="cart-total">
-        Total : 0 FCFA
+        <!-- TOTAL -->
+        <div class="cart-total" id="cart-total">
+            Total : 0 FCFA
+        </div>
+
+        <!-- FORMULAIRE -->
+        <div class="commande-form">
+
+            <input
+            type="text"
+            id="nom"
+            placeholder="Votre nom">
+
+            <input
+            type="text"
+            id="numero"
+            placeholder="Numero deTéléphone">
+
+            <input
+            type="text"
+            id="adresse"
+            placeholder="Adresse livraison">
+
+        </div>
+
+        <!-- BOUTONS -->
+        <button
+        class="checkout-btn"
+        onclick="commander()">
+
+            Commander
+
+        </button>
+
+        <button
+        class="delete-btn"
+        onclick="clearCart()">
+
+            Vider le panier
+
+        </button>
+
     </div>
 
-    <button class="checkout-btn">
-        Commander
-    </button>
+    <div class="retour">
 
-</div>
+        <a href="index.html">
+            Retour à l'accueil
+        </a>
 
+    </div>
 
-<div class="retour">
-    <a href="index.html">retoure a l'acceuilt</a>
-  </div>
+    <hr>
 
-  <hr>
-  
-  <footer>
-      <p>@Créé par Nawaf</p>
-  
-  </footer>
+    <footer>
 
-<script src="panier.js"></script>
+        <p>@Créé par Nawaf</p>
 
+    </footer>
 
+    <script src="panier.js"></script>
 
 </body>
+
 </html>
