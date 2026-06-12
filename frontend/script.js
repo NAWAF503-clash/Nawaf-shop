@@ -128,47 +128,25 @@ min="1">
 
 </div>
 
-            <div class="box">
+<div class="box">
 
     <div class="prix">
         ${p.prix} FCFA
     </div>
 
+    <button class="achat"
+    onclick="ajouterAuPanier(
+    '${p._id}',
+    '${p.nom}',
+    '${p.prix}',
+    '${p.images?.[0] || ""}'
+    )">
+
+        Acheter
+
+    </button>
+
 </div>
-
-${p.couleurs && p.couleurs.length > 0 ? `
-<select id="couleur-${p._id}">
-    ${p.couleurs.map(c =>
-        `<option value="${c}">${c}</option>`
-    ).join("")}
-</select>
-` : ''}
-
-${p.tailles && p.tailles.length > 0 ? `
-<select id="taille-${p._id}">
-    ${p.tailles.map(t =>
-        `<option value="${t}">${t}</option>`
-    ).join("")}
-</select>
-` : ''}
-
-<input
-type="number"
-id="quantite-${p._id}"
-value="1"
-min="1">
-
-<button class="achat"
-onclick="ajouterAuPanier(
-'${p.nom}',
-'${p.prix}',
-'${p.images?.[0] || ""}',
-'${p._id}'
-)">
-Acheter
-</button>
-
-            </div>
 
         </div>
         `;
