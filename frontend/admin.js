@@ -79,7 +79,7 @@ async function chargerProduits(){
                     Supprimer
                 </button>
 
-                <button onclick="modifierProduit('${p._id}')">
+                <button onclick="modifierProduit('${p._id}', '${p.prix}')">
                     Modifier
                 </button>
 
@@ -238,42 +238,18 @@ async function changerStatut(id){
     chargerCommandes();
 }
 
-async function modifierProduit(id){
+async function modifierProduit(id, ancienPrix){
 
-    const nom =
-    prompt("Nouveau nom");
+    const nouveauPrix = prompt(
+        "Nouveau prix :",
+        ancienPrix
+    );
 
-    const description =
-    prompt("Nouvelle description");
-
-    const prix =
-    prompt("Nouveau prix");
-
-    const image1 =
-    prompt("Image 1 URL");
-
-    const image2 =
-    prompt("Image 2 URL");
-
-    const image3 =
-    prompt("Image 3 URL");
-
-    const video =
-    prompt("URL vidéo");
-
-    const couleurs =
-    prompt("Couleurs séparées par virgule");
-
-    const tailles =
-    prompt("Tailles séparées par virgule");
-
-    const stock =
-    prompt("Quantité stock");
+    if(!nouveauPrix) return;
 
     await fetch(
         `https://nawaf-shop-backend.onrender.com/product/${id}`,
         {
-
             method:"PUT",
 
             headers:{
@@ -281,33 +257,12 @@ async function modifierProduit(id){
             },
 
             body:JSON.stringify({
-
-                nom,
-
-                description,
-
-                prix,
-
-                images:[
-                    image1,
-                    image2,
-                    image3
-                ],
-
-                video,
-
-                couleurs: couleurs.split(","),
-
-                tailles: tailles.split(","),
-
-                stock
-
+                prix: nouveauPrix
             })
-
         }
     );
 
-    alert("Produit modifié");
+    alert("Prix modifié ✅");
 
     chargerProduits();
 }

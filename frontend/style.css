@@ -539,50 +539,223 @@ cursor: pointer;
 
 /* Téléphone */
 @media (max-width: 480px){
+
+    .options{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:4px;
+
+    padding:5px 8px;
+}
+
+.option-box{
+
+    flex:1;
+
+    min-width:55px;
+}
+
+.option-box label{
+
+    font-size:9px;
+}
+
+/* points couleur */
+
+.color-dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    border:1px solid #ddd;
+}
+
+/* tailles */
+
+.size-btn{
+
+    padding:2px 6px;
+
+    font-size:10px;
+}
+
+/* quantité */
+
+.qty-box button{
+
+    width:20px;
+
+    height:20px;
+}
+
+.qty-box input{
+
+    width:28px;
+
+    height:20px;
+
+    font-size:10px;
+}
+
     .produits{
+
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+
+        gap: 12px;
+
+        padding: 5px;
     }
 
     .produits .carte{
-        height: 320px;
+
+    height:auto;
+
+    min-height:320px;
+
+    padding-bottom:10px;
+}
+
+    /* SWIPER */
+
+    .swiper{
+
+        width: 100%;
+
+        height: 120px;
+
+        overflow: hidden;
     }
 
-    .produits .carte img{
-        height: 140px;
-    }
+    .swiper-slide{
 
-    .produits .carte .titre{
-        font-size: 14px;
-    }
+        width: 100%;
 
-    .produits .carte .prix{
-        font-size: 14px;
-    }
+        height: 160px;
 
-    .produits .carte .achat{
-        padding: 8px 12px;
-        font-size: 12px;
-    }
+        display: flex;
 
-     .swiper{
-        height:140px;
+        justify-content: center;
+
+        align-items: center;
+
+        overflow: hidden;
     }
 
     .swiper-slide img,
+
     .swiper-slide video{
-        height:140px;
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        display: block;
     }
 
-    .desc{
-    height: 40px;
-    overflow: hidden;
+    /* TEXTE */
+
+    .produits .carte .titre{
+
+        font-size: 13px;
+
+        padding: 5px 8px;
+
+        min-height: 35px;
+    }
+
+    .produits .carte .desc{
+
+        font-size: 11px;
+
+        padding: 0 8px;
+
+        height: 32px;
+    }
+
+    .prix{
+
+        font-size: 14px;
+    }
+
+    /* OPTIONS */
+
+    .options{
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 5px;
+
+        padding: 5px 8px;
+    }
+
+    .option-box{
+
+        flex: 1;
+
+        min-width: 60px;
+    }
+
+    .option-box label{
+
+        font-size: 10px;
+
+        margin-bottom: 2px;
+
+        display: block;
+    }
+
+    .option-box select,
+
+    .option-box input{
+
+        width: 100%;
+
+        height: 28px;
+
+        font-size: 11px;
+
+        border-radius: 6px;
+
+        border: 1px solid #ddd;
+
+        padding: 2px 4px;
+    }
+
+    /* BOUTON */
+
+    .achat{
+
+        width: 100%;
+
+        margin-top: 8px;
+
+        height: 32px;
+
+        font-size: 12px;
+
+        border-radius: 8px;
+    }
+
 }
 
-.titre{
-    height: 45px;
-    overflow: hidden;
-}
+.swiper-slide img,
+.swiper-slide video{
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
 }
 
 
@@ -807,4 +980,113 @@ cursor: pointer;
 
         text-align:left;
     }
+}
+
+/* COULEURS */
+
+.colors{
+
+    display:flex;
+
+    gap:6px;
+
+    margin-top:5px;
+}
+
+.color-dot{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    border:2px solid #ddd;
+
+    cursor:pointer;
+}
+
+.active-color{
+
+    border:2px solid black;
+
+    transform:scale(1.1);
+}
+
+/* TAILLES */
+
+.sizes{
+
+    display:flex;
+
+    gap:5px;
+
+    margin-top:5px;
+}
+
+.size-btn{
+
+    border:none;
+
+    background:#f1f1f1;
+
+    padding:4px 8px;
+
+    border-radius:6px;
+
+    font-size:11px;
+
+    cursor:pointer;
+}
+
+.active-size{
+
+    background:black;
+
+    color:white;
+}
+
+/* QUANTITÉ */
+
+.qty-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:8px;
+}
+
+.qty-box button{
+
+    width:24px;
+
+    height:24px;
+
+    border:none;
+
+    border-radius:5px;
+
+    background:black;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.qty-box input{
+
+    width:35px;
+
+    text-align:center;
+
+    border:none;
+
+    background:#f5f5f5;
+
+    border-radius:5px;
+
+    height:24px;
 }

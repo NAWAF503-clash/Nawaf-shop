@@ -107,13 +107,26 @@ async function chargerProduits() {
 ${p.couleurs && p.couleurs.length > 0 ? `
 <div class="option-box">
 
-<label>Couleur</label>
+<div class="colors">
 
-<select id="color-${p._id}">
-    ${p.couleurs.map(c =>
-        `<option value="${c}">${c}</option>`
-    ).join("")}
-</select>
+${p.couleurs.map(c => `
+
+<div
+class="color-dot"
+style="
+background:${convertColor(c)};
+"
+onclick="selectColor(this, '${c}', '${p._id}')">
+</div>
+
+`).join("")}
+
+<input
+type="hidden"
+id="color-${p._id}"
+value="${p.couleurs[0]}">
+
+</div>
 
 </div>
 ` : ''}
@@ -121,26 +134,51 @@ ${p.couleurs && p.couleurs.length > 0 ? `
 ${p.tailles && p.tailles.length > 0 ? `
 <div class="option-box">
 
-<label>Taille</label>
 
-<select id="size-${p._id}">
-    ${p.tailles.map(t =>
-        `<option value="${t}">${t}</option>`
-    ).join("")}
-</select>
+<div class="sizes">
+
+${p.tailles.map(t => `
+
+<button
+class="size-btn"
+onclick="selectSize(this, '${t}', '${p._id}')">
+
+${t}
+
+</button>
+
+`).join("")}
+
+<input
+type="hidden"
+id="size-${p._id}"
+value="${p.tailles[0]}">
+
+</div>
 
 </div>
 ` : ''}
 
 <div class="option-box">
 
-<label>Qté</label>
+
+<div class="qty-box">
+
+<button onclick="changeQty('${p._id}', -1)">
+-
+</button>
 
 <input
-type="number"
+type="text"
 id="qty-${p._id}"
 value="1"
-min="1">
+readonly>
+
+<button onclick="changeQty('${p._id}', 1)">
++
+</button>
+
+</div>
 
 </div>
 
@@ -320,3 +358,72 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+function selectColor(el, color, id){
+
+    document
+    .querySelectorAll(`#product-${id} .color-dot`)
+    .forEach(dot => {
+
+        dot.classList.remove("active-color");
+
+    });
+
+    el.classList.add("active-color");
+
+    document
+    .getElementById(`color-${id}`)
+    .value = color;
+}
+
+function selectSize(el, size, id){
+
+    document
+    .querySelectorAll(`#product-${id} .size-btn`)
+    .forEach(btn => {
+
+        btn.classList.remove("active-size");
+
+    });
+
+    el.classList.add("active-size");
+
+    document
+    .getElementById(`size-${id}`)
+    .value = size;
+}
+
+function changeQty(id, amount){
+
+    const input =
+    document.getElementById(`qty-${id}`);
+
+    let value = Number(input.value);
+
+    value += amount;
+
+    if(value < 1) value = 1;
+
+    input.value = value;
+}
+
+
+function convertColor(color){
+
+    const colors = {
+
+        Noir: "black",
+        Blanc: "white",
+        Rouge: "red",
+        Bleu: "blue",
+        Vert: "green",
+        Jaune: "yellow",
+        Orange: "orange",
+        Rose: "pink",
+        Gris: "gray",
+        Violet: "purple"
+
+    };
+
+    return colors[color] || color;
+}
